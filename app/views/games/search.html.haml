@@ -3,28 +3,34 @@
 %h3 Search games
 -if @games && @games.count>0
   %p
-    = @games.count
-    results
-  %table#results
-    %thead
-      %tr
-        %th Id
-        %th Date
-        %th White
-        %th Black
-        %th Result
-        %th Notation
-    %tbody
-      - @games.each do |game|
+  .container
+    %table.table.table-striped
+      %thead
         %tr
-          %td= game.id
-          %td= DateTime.strptime((game.date/1000).to_s, '%s').to_s
+          %th Id
+          %th Date
+          %th White
+          %th Black
+          %th Result
+          %th Notation
+      %tbody
+        - @games.each do |game|
+          - if @player_search and game.date < 1461430800000; next; end
 
-          %td= game.player_white
-          %td= game.player_black
+          %tr
+            %td= game.id
+            - dt = DateTime.strptime((game.date/1000).to_s, '%s').to_s
+            %td= (dt.gsub 'T', ' ').gsub '+00:00', ''
 
-          %td= game.result
-          %td= game.notation
+            - if game.date < 1461430800000
+              %td= 'Anon'
+              %td= 'Anon'
+            - else
+              %td= game.player_white
+              %td= game.player_black
+
+            %td= game.result
+            %td= game.notation
 
 -else
   No results found!

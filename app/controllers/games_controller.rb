@@ -35,16 +35,5 @@ class GamesController < ApplicationController
     queryfinal+=querys
 
     @games = Game.where(queryfinal) if queryfinal.length>1
-
-    @games.each do |game|
-      if game.date <= 1461430800000
-        if @player_search
-          @games.remove(game)
-        else
-          game.player_white = 'Anon'
-          game.player_black = 'Anon'
-        end
-      end
-    end
   end
 end
