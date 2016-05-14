@@ -1,0 +1,19 @@
+=form_tag search_games_path, :method=>"get"
+%h4 Select/fill atleast one field and search
+%table#search
+  %tbody
+    %tr
+      %td
+        = label :game, :player_white, 'White'
+        = text_field :game, :player_white
+    %tr
+      %td
+        = label :game, :player_black, 'Black'
+        = text_field :game, :player_black
+    %tr
+      %td
+        = label :game, :result, 'Result'
+        = select :game, :result, {"Any"=>"", "R-0"=>"R-0", "F-0"=>"F-0", "0-R"=>"0-R", "0-F"=>"0-F", "1-0"=>"1-0", "0-1"=>"0-1"}
+    %tr
+      %td
+        = submit_tag "Search"

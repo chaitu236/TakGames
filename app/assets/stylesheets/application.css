@@ -11,3 +11,47 @@
  *= require_self
  *= require_tree .
  */
+
+table#title {
+	width: 100%;
+	background-color: lightblue;
+}
+
+table#search {
+	border-spacing: 2px;
+}
+
+table#search td:nth-child(1){
+	font-weight: bold;
+}
+
+input[type="text"] {
+    max-width: 200px;
+}
+
+#dp input[type="text"] {
+    max-width: 91px;
+}
+
+table#search td:nth-child(2){
+	font-style: italic;
+	font-size: 80%;
+	text-align: center;
+}
+
+table#results {
+	margin: 10px;
+	width: 80%;
+	text-align: center;
+}
+
+table#results th {
+	border: 1px;
+	font-weight: bold;
+	background-color: steelblue;
+	color: white;
+}
+
+table#results tr:nth-child(even){
+	background: lightblue;
+}

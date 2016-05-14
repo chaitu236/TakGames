@@ -1,4 +1,11 @@
 TakGames::Application.routes.draw do
+  resources :games do
+    collection do
+      get 'search'
+    end
+  end
+
+  root :to => redirect('/games')
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
