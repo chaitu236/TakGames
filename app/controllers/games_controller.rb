@@ -39,7 +39,7 @@ class GamesController < ApplicationController
     queryfinal=[queryfinalf]
     queryfinal+=querys
 
-    @games = Game.where(queryfinal) if queryfinal.length>1
+    @games = Game.where(queryfinal).order('id DESC') if queryfinal.length>1
   end
 
   def get_header(key, val)

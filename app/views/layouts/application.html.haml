@@ -1,15 +1,15 @@
 !!!5
 %html
-   %head
-      %meta{:name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0;"}
-      %meta{:name => "keywords", :content => "Search for previous Tak games"}
-      %meta{:name => "keywords", :content => "tak games, tak history, player history"}
-      %meta{:name => "author", :content => "Chaitanya Vadrevu"}
+  %head
+    %meta{:name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0;"}
+    %meta{:name => "keywords", :content => "Search for previous Tak games"}
+    %meta{:name => "keywords", :content => "tak games, tak history, player history"}
+    %meta{:name => "author", :content => "Chaitanya Vadrevu"}
 
-      %title Tak Games
-      = csrf_meta_tags
+    %title Tak Games
+    = csrf_meta_tags
 
-   %body{:onload=>'onloadcallback();'}
-     = stylesheet_link_tag 'application'
-     #main
-       = yield
+  %body
+    = stylesheet_link_tag 'application'
+    #main
+      = yield

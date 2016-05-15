@@ -1,18 +1,19 @@
+%h5.text-center Games before 23rd April 5:00 PM GMT are anonymized and won't appear when searching with player name
+%h5.text-center Please don't scrape this site. I will release the database after anonymizing games played before 23rd April
+%br
+%h5.text-center Select/fill atleast one field and search
 =form_tag search_games_path, :method=>"get"
-%h4.align-center Select/fill atleast one field and search
-.container
+#search.container
   %form.form-horizontal
     .form-group
       %label.col-sm-2 White Player
       .col-sm-10
         %input.form-control{:name=>'game[player_white]'}
-    .row
 
     .form-group
       %label.col-sm-2 Black Player
       .col-sm-10
         %input.form-control{:name=>'game[player_black]'}
-    .row
 
     .form-group
       %label.col-sm-2 Size
