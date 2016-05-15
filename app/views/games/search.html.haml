@@ -1,19 +1,22 @@
 =render :partial=>'search_form'
 
-%h3 Search games
--if @games && @games.count>0
-  %p
-  .container
-    %table.table.table-striped
-      %thead
-        %tr
-          %th Id
-          %th Date
-          %th White
-          %th Black
-          %th Result
-          %th Notation
-      %tbody
+%h4 Results
+//-if @games && @games.count>0
+%p
+.container
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Id
+        %th Time (UTC)
+        %th Size
+        %th White
+        %th Black
+        %th Result
+        //%th.hidden Notation
+        %th Notation
+    %tbody
+      - if @games && @games.count>0
         - @games.each do |game|
           - if @player_search and game.date < 1461430800000; next; end
 
@@ -21,6 +24,7 @@
             %td= game.id
             - dt = DateTime.strptime((game.date/1000).to_s, '%s').to_s
             %td= (dt.gsub 'T', ' ').gsub '+00:00', ''
+            %td= game.size.to_s+'x'+game.size.to_s
 
             - if game.date < 1461430800000
               %td= 'Anon'
@@ -30,7 +34,8 @@
               %td= game.player_black
 
             %td= game.result
-            %td= game.notation
+            //%td.hidden= game.notation
+            %td{:onclick=>"download("+game.id.to_s+");"} Download
 
--else
-  No results found!
+//-else
+//  No results found!

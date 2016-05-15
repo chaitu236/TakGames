@@ -1,19 +1,47 @@
 =form_tag search_games_path, :method=>"get"
-%h4 Select/fill atleast one field and search
-%table#search
-  %tbody
-    %tr
-      %td
-        = label :game, :player_white, 'White Player'
-        = text_field :game, :player_white
-    %tr
-      %td
-        = label :game, :player_black, 'Black Player'
-        = text_field :game, :player_black
-    %tr
-      %td
-        = label :game, :result, 'Result'
-        = select :game, :result, {"Any"=>"", "R-0"=>"R-0", "F-0"=>"F-0", "0-R"=>"0-R", "0-F"=>"0-F", "1-0"=>"1-0", "0-1"=>"0-1"}
-    %tr
-      %td
-        = submit_tag "Search"
+%h4.align-center Select/fill atleast one field and search
+.container
+  %form.form-horizontal
+    .form-group
+      %label.col-sm-2 White Player
+      .col-sm-10
+        %input.form-control{:name=>'game[player_white]'}
+    .row
+
+    .form-group
+      %label.col-sm-2 Black Player
+      .col-sm-10
+        %input.form-control{:name=>'game[player_black]'}
+    .row
+
+    .form-group
+      %label.col-sm-2 Size
+      .col-sm-10
+        %select.form-control{:name=>'game[size]'}
+          %option{:value=>''} Any
+          %option{:value=>'3'} 3x3
+          %option{:value=>'4'} 4x4
+          %option{:value=>'5'} 5x5
+          %option{:value=>'6'} 6x6
+          %option{:value=>'7'} 7x7
+          %option{:value=>'8'} 8x8
+
+    .form-group
+      %label.col-sm-2 Result
+      .col-sm-10
+        %select.form-control{:name=>'game[result]'}
+          %option{:value=>''} Any
+          %optgroup{:label=>'White Wins'}
+            %option{:value=>'R-0'} R-0
+            %option{:value=>'F-0'} F-0
+            %option{:value=>'1-0'} 1-0
+          %optgroup{:label=>'Black Wins'}
+            %option{:value=>'0-R'} 0-R
+            %option{:value=>'0-F'} 0-F
+            %option{:value=>'0-1'} 0-1
+          %optgroup{:label=>'Draw'}
+            %option{:value=>'1/2-1/2'} 1/2-1/2
+    .row
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        %button.btn.btn-primary Search
