@@ -35,7 +35,8 @@
 
             %td= game.result
             //%td.hidden= game.notation
-            %td{:onclick=>"download("+game.id.to_s+");"} Download
+            //%td{:onclick=>"download("+game.id.to_s+");"} Download
+            %td= link_to "Download", game_path(game.id)
 
 //-else
 //  No results found!
