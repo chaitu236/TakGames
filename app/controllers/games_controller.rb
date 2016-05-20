@@ -142,4 +142,22 @@ class GamesController < ApplicationController
       send_data ptn, :filename => wn + ' vs ' + bn + ' ' + dt.split(' ')[0].gsub('-', '.') + '.ptn'
     end
   end
+
+  def view
+    id = params[:id]
+    games = Game.where('id = ?', id)
+
+    if(games.length == 1)
+      game = games[0]
+      ptn = get_ptn(game)
+
+      wn = (game.date < 1461430800000) ? 'Anon':game.player_white
+      bn = (game.date < 1461430800000) ? 'Anon':game.player_black
+      dt = DateTime.strptime((game.date/1000).to_s, '%s').to_s
+      dt = (dt.gsub 'T', ' ').gsub '+00:00', ''
+
+      send_data ptn, :type => 'text', :disposition => 'inline'
+    end
+
+  end
 end
