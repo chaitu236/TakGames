@@ -158,6 +158,17 @@ class GamesController < ApplicationController
 
       send_data ptn, :type => 'text', :disposition => 'inline'
     end
+  end
 
+  def ptnviewer
+    id = params[:id]
+    games = Game.where('id = ?', id)
+
+    if(games.length == 1)
+      game = games[0]
+      ptn = get_ptn(game)
+      redirect_to 'https://jsfiddle.net/bwochinski/043hpzwu/embedded/result/?ptn=' +
+        URI.encode(ptn)
+    end
   end
 end
