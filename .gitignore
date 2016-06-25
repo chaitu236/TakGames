@@ -19,3 +19,4 @@
 readonlydb/
 readonly.sh
 public/games_anon.db
+*.patch

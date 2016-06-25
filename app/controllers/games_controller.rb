@@ -171,4 +171,17 @@ class GamesController < ApplicationController
         URI.encode(ptn)
     end
   end
+
+  def ninjaviewer
+    id = params[:id]
+    games = Game.where('id = ?', id)
+
+    if(games.length == 1)
+      game = games[0]
+      ptn = get_ptn(game)
+      ptn.gsub!('/', '-')
+      ptn.gsub!('=', '$')
+      redirect_to 'http://ptn.ninja/#' + URI.encode(ptn)
+    end
+  end
 end
