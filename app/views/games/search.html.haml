@@ -1,6 +1,15 @@
 =render :partial=>'search_form'
 
-%h4.text-center Results
+%h4.text-center
+  - if @prev_offset
+    =link_to "<", params.deep_merge({:game => {:offset => @prev_offset}})
+  -else
+    <
+  Results
+  - if @next_offset
+    =link_to ">", params.deep_merge({:game => {:offset => @next_offset}})
+  -else
+    >
 //-if @games && @games.count>0
 %p
 .container
@@ -35,8 +44,7 @@
               %td= game.player_black
 
             %td= game.result
-            //%td.hidden= game.notation
-            //%td{:onclick=>"download("+game.id.to_s+");"} Download
+
             %td
               = link_to "Download", game_path(game.id)
               %br

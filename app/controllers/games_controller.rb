@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   def index
   #  @games = Game.all
+    params[:game] = {}
   end
 
   def search
@@ -10,15 +11,17 @@ class GamesController < ApplicationController
 
     queryf = []
     querys = []
+    join = ' and '
+    offset = 0
+
     if data[:player_white] && data[:player_white].length > 0
       queryf[queryf.count] = "player_white like ?"
       querys[querys.count] = data[:player_white]
       @player_search = true
     end
 
-    if data[:size] && data[:size].length > 0
-      queryf[queryf.count] = "size = ?"
-      querys[querys.count] = data[:size]
+    if data[:join] && data[:join].length > 0
+      join = ' or ' if data[:join] == 'or'
     end
 
     if data[:player_black] && data[:player_black].length > 0
@@ -27,19 +30,36 @@ class GamesController < ApplicationController
       @player_search = true
     end
 
+    if data[:size] && data[:size].length > 0
+      queryf[queryf.count] = "size = ?"
+      querys[querys.count] = data[:size]
+    end
+
     if data[:result] && data[:result].length > 0
       queryf[queryf.count] = "result = ?"
       querys[querys.count] = data[:result]
     end
 
+    if data[:offset] && data[:offset].length > 0
+      offset = data[:offset].to_i
+    end
+
+    if @player_search
+      queryf[queryf.count] = "id > ?"
+      querys[querys.count] = "7979"
+    end
+
     queryfinalf=''
-    queryf.each do |i| queryfinalf+=i+' and ' end
+    queryf.each do |i| queryfinalf += i + join end
     queryfinalf = queryfinalf[0..-(' and '.length)]
 
     queryfinal=[queryfinalf]
     queryfinal+=querys
 
-    @games = Game.where(queryfinal).order('id DESC') if queryfinal.length>1
+    @games = Game.where(queryfinal).order('id DESC').limit(100).offset(offset) if queryfinal.length>1
+
+    @next_offset = offset + 100 if @games.size == 100
+    @prev_offset = offset - 100 if offset >= 100
   end
 
   def get_header(key, val)

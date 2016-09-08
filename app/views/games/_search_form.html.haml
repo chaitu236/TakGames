@@ -1,5 +1,5 @@
 %h5.text-center Games before 23rd April 5:00 PM GMT are anonymized and won't appear when searching with player name
-%h5.text-center Please don't scrape this site. You can directly download the database <a href="games_anon.db">here</a> (16 MB) (updated on June 24) but note that the notation is in server's format.
+%h5.text-center Please don't scrape this site. You can directly download the database <a href="games_anon.db">here</a> (24 MB) (updated on Sep 3) but note that the notation is in server's format.
 %h6.text-center The link above will be updated with latest database every now and then.
 
 %br
@@ -9,18 +9,23 @@
   %form.form-horizontal
     .form-group
       %label.col-sm-2 White Player
-      .col-sm-10
-        %input.form-control{:name=>'game[player_white]'}
+      .col-sm-4
+        %input.form-control{:name=>'game[player_white]', :value=>params[:game][:player_white]}
 
-    .form-group
+      //.col-sm-1
+      //  %select.form-control{:name=>'game[join]', :value=>params[:game][:join]}
+      //    %option{:value=>'and'} AND
+      //    %option{:value=>'or'} OR
+
       %label.col-sm-2 Black Player
-      .col-sm-10
-        %input.form-control{:name=>'game[player_black]'}
+      .col-sm-4
+        %input.form-control{:name=>'game[player_black]', :value=>params[:game][:player_black]}
 
+    .row
     .form-group
       %label.col-sm-2 Size
-      .col-sm-10
-        %select.form-control{:name=>'game[size]'}
+      .col-sm-4
+        %select.form-control{:name=>'game[size]', :value=>params[:game][:size]}
           %option{:value=>''} Any
           %option{:value=>'3'} 3x3
           %option{:value=>'4'} 4x4
@@ -29,10 +34,9 @@
           %option{:value=>'7'} 7x7
           %option{:value=>'8'} 8x8
 
-    .form-group
       %label.col-sm-2 Result
-      .col-sm-10
-        %select.form-control{:name=>'game[result]'}
+      .col-sm-4
+        %select.form-control{:name=>'game[result]', :value=>params[:game][:result]}
           %option{:value=>''} Any
           %optgroup{:label=>'White Wins'}
             %option{:value=>'R-0'} R-0
