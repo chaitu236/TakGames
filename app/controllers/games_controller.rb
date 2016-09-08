@@ -6,8 +6,6 @@ class GamesController < ApplicationController
 
   def search
     data = params[:game]
-    logger.debug('data')
-    logger.debug(data)
 
     queryf = []
     querys = []
@@ -44,14 +42,14 @@ class GamesController < ApplicationController
       offset = data[:offset].to_i
     end
 
-    if @player_search
+    if @player_search and join == ' and '
       queryf[queryf.count] = "id > ?"
       querys[querys.count] = "7979"
     end
 
     queryfinalf=''
     queryf.each do |i| queryfinalf += i + join end
-    queryfinalf = queryfinalf[0..-(' and '.length)]
+    queryfinalf = queryfinalf[0..-(join.length)]
 
     queryfinal=[queryfinalf]
     queryfinal+=querys
