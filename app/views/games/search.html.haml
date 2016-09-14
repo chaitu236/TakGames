@@ -19,6 +19,7 @@
         %th Id
         %th Time (UTC)
         %th Size
+        %th Clock
         %th White
         %th Black
         %th Result
@@ -35,6 +36,11 @@
             - dt = DateTime.strptime((game.date/1000).to_s, '%s').to_s
             %td= (dt.gsub 'T', ' ').gsub '+00:00', ''
             %td= game.size.to_s+'x'+game.size.to_s
+
+            - if game.timertime == 0 and game.timerinc == 0
+              %td= '-'
+            -else
+              %td= (game.timertime/60).to_s+':'+(game.timertime%60).to_s+' +'+game.timerinc.to_s
 
             - if game.date < 1461430800000
               %td= 'Anon'

@@ -56,8 +56,10 @@ class GamesController < ApplicationController
 
     @games = Game.where(queryfinal).order('id DESC').limit(100).offset(offset) if queryfinal.length>1
 
-    @next_offset = offset + 100 if @games.size == 100
-    @prev_offset = offset - 100 if offset >= 100
+    if @games != nil
+      @next_offset = offset + 100 if @games.size == 100
+      @prev_offset = offset - 100 if offset >= 100
+    end
   end
 
   def get_header(key, val)
@@ -120,6 +122,24 @@ class GamesController < ApplicationController
     return moves
   end
 
+  def get_timer_info(timertime, timerinc)
+    secs = timertime%60
+    timertime = timertime/60
+
+    mins = timertime%60
+    hrs = timertime/60
+
+    val = ''
+    force = false
+
+    val += hrs.to_s+':' and force = true if hrs != 0
+    val += mins.to_s+':' and force = true if mins != 0 or force
+    val += secs.to_s+'' if secs != 0 or force
+    val += ' +'+timerinc.to_s if timerinc != 0
+
+    return val
+  end
+
   def get_ptn(game)
     ptn = ''
 
@@ -137,6 +157,7 @@ class GamesController < ApplicationController
 
     ptn += get_header('Player1', wn)
     ptn += get_header('Player2', bn)
+    ptn += get_header('Clock', get_timer_info(game.timertime, game.timerinc))
     ptn += get_header('Result', game.result)
     ptn += get_header('Size', game.size)
 
@@ -197,8 +218,6 @@ class GamesController < ApplicationController
     if(games.length == 1)
       game = games[0]
       ptn = get_ptn(game)
-      ptn.gsub!('/', '-')
-      ptn.gsub!('=', '$')
       redirect_to 'http://ptn.ninja/#' + URI.encode(ptn)
     end
   end
