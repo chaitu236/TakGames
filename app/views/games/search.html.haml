@@ -61,3 +61,14 @@
               = link_to "jsfiddle", ptnviewer_game_path(game.id), target: "_blank"
 //-else
 //  No results found!
+
+%h4.text-center
+  - if @prev_offset
+    =link_to "<", params.deep_merge({:game => {:offset => @prev_offset}})
+  -else
+    <
+  Results
+  - if @next_offset
+    =link_to ">", params.deep_merge({:game => {:offset => @next_offset}})
+  -else
+    >
