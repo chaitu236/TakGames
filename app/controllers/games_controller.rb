@@ -54,7 +54,7 @@ class GamesController < ApplicationController
     queryfinal=[queryfinalf]
     queryfinal+=querys
 
-    @games = Game.where(queryfinal).order('id DESC').limit(100).offset(offset) if queryfinal.length>1
+    @games = Game.where(queryfinal).order('id DESC').limit(100).offset(offset)
 
     if @games != nil
       @next_offset = offset + 100 if @games.size == 100
