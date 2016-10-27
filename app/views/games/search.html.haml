@@ -56,9 +56,11 @@
               %br
                 = link_to "View", view_game_path(game.id), target: "_blank"
             %td
-              = link_to "ptn.ninja", ninjaviewer_game_path(game.id), target: "_blank"
+              = link_to "PlayTak", playtakviewer_game_path(game.id), target: "_blank"
               %br
               = link_to "jsfiddle", ptnviewer_game_path(game.id), target: "_blank"
+              %br
+              = link_to "ptn.ninja", ninjaviewer_game_path(game.id), target: "_blank"
 //-else
 //  No results found!
 

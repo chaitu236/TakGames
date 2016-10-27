@@ -7,6 +7,7 @@ TakGames::Application.routes.draw do
       get 'view'
       get 'ptnviewer'
       get 'ninjaviewer'
+      get 'playtakviewer'
     end
   end
 

@@ -221,4 +221,15 @@ class GamesController < ApplicationController
       redirect_to 'http://ptn.ninja/#' + URI.encode(ptn)
     end
   end
+
+  def playtakviewer
+    id = params[:id]
+    games = Game.where('id = ?', id)
+
+    if(games.length == 1)
+      game = games[0]
+      ptn = get_ptn(game)
+      redirect_to 'https://www.playtak.com/?load=' + URI.encode(ptn)
+    end
+  end
 end
