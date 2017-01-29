@@ -218,7 +218,7 @@ class GamesController < ApplicationController
     if(games.length == 1)
       game = games[0]
       ptn = get_ptn(game)
-      redirect_to 'http://ptn.ninja/#' + URI.encode(ptn)
+      redirect_to 'http://ptn.ninja/#' + URI.encode(ptn).gsub("[","%5B").gsub("]","%5D")
     end
   end
 
