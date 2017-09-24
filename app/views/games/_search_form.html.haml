@@ -1,8 +1,11 @@
-%h5.text-center Games before 23rd April 5:00 PM UTC are anonymized and won't appear when searching with player name
-%h5.text-center Please don't scrape this site. You can directly download the database <a href="/games_anon.db">here</a> (36 MB) (updated on Dec 24) but note that the notation is in server's format.
-%h6.text-center The link above will be updated with latest database every day at 5:00 PM UTC.
+%div.text-center
+  %a.btn{'data-toggle' => 'collapse', 'data-target' => '#view_info'} Info
 
-%br
+%div.collapse#view_info
+  %h5.text-center Games before 23rd April 5:00 PM UTC are anonymized and won't appear when searching with player name
+  %h5.text-center Please don't scrape this site. You can directly download the database <a href="/games_anon.db">here</a> (64 MB) (updated on Sep 24) but note that the notation is in server's format.
+  %h6.text-center The link above will be updated with latest database every day at 5:00 PM UTC.
+
 %h4.text-center Select/fill atleast one field and search
 =form_tag search_games_path, :method=>"get"
 #search.container
