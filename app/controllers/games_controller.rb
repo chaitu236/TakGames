@@ -229,7 +229,7 @@ class GamesController < ApplicationController
     if(games.length == 1)
       game = games[0]
       ptn = get_ptn(game)
-      redirect_to 'https://www.playtak.com/?load=' + URI.encode(ptn)
+      redirect_to '/?load=' + URI.encode(ptn)
     end
   end
 end
